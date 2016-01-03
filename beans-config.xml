@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN" 
+  "http://www.springframework.org/dtd/spring-beans.dtd"> 
+
+<beans> 
+    <bean id="HelloWord" 
+          class="HelloWord"> 
+        <property name="HelloWord">
+            <value>Hello!Justin!</value>
+        </property> 
+    </bean> 
+    
+    <bean id="dataSource" 
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+        <property name="driverClassName"> 
+            <value>org.postgresql.Driver</value> 
+        </property> 
+        <property name="url"> 
+            <value>jdbc:postgresql://localhost:5432/jiahunghsu</value> 
+        </property> 
+        <property name="username"> 
+            <value>jiahunghsu</value> 
+        </property> 
+        <property name="password"> 
+            <value>jiahunghsu</value> 
+        </property>  
+    </bean> 
+    
+    <bean id="RaytestDAO" 
+          class="RaytestDAO">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+    </bean>
+    
+     <bean id="sessionFactory"  
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" 
+          destroy-method="destroy"> 
+        <property name="dataSource"> 
+            <ref bean="dataSource"/> 
+        </property> 
+        <property name="mappingResources"> 
+            <list> 
+                <value>Raytest.hbm.xml</value> 
+            </list> 
+        </property> 
+        <property name="hibernateProperties"> 
+            <props> 
+                <prop key="hibernate.dialect"> 
+                    org.hibernate.dialect.PostgreSQLDialect
+                </prop> 
+            </props> 
+        </property> 
+    </bean> 
+    
+</beans>
